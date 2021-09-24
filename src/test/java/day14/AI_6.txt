@@ -1,0 +1,11 @@
+Hey All, we came a long way. Now it’s time to be serious and stay motivated to land your dream job.
+
+Action Item:
+Take express action item and convert it to page object model framework. Using new reusable methods and annotation class. Update the reusable methods that I didn’t modify by adding logger, screenshot and changing xpath string to WebElement. Once you have completed the project just commit and push it to github and send screenshot of html report.
+
+Best of luck and make the final assignment count :)
+
+Sent from my iPhone
+
+
+SIZE is paced from exernal make own method!
