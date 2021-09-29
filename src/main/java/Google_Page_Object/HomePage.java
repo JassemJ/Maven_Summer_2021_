@@ -9,15 +9,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends Reuseable_Annotations_Class_HTML_Report { // page object class
+    // object repository to store web elements
+    // add methods that act on elements
+    // create classes for each webpage
 
     ExtentTest logger; // empty
-    public HomePage(WebDriver driver){
+    public HomePage(WebDriver driver){ // driver empty ?
+        // Page Factory helps implement Page Object Model
         PageFactory.initElements(driver, this); // driver = driver from annotations class
         // driver initialized for all elements
         this.logger= Reuseable_Annotations_Class_HTML_Report.logger; // logger (line 12) = logger from html report
     }
 
-    // set up all web elements xpath locators I need for this page
+    // set up all web elements xpath locators I need for this page        page factory concept
     @FindBy(xpath = "//*[@name='q']") // string
     WebElement searchField; // WebElement defined by above locator
 

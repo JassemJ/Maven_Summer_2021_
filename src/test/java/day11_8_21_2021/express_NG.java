@@ -27,9 +27,9 @@ public class express_NG {
     @BeforeSuite
     public void setTheDriverAndWorkbook() throws IOException, BiffException {
         //step 1: locate the file path where you save it
-        readableFile = Workbook.getWorkbook(new File("src/main/resources/ExpressShopping.xls"));
+        readableFile = Workbook.getWorkbook(new File("src/main/resources/express.xls"));
         //create a writable file that mimics the readable in order to write back your result and not corrupt the readable
-        writableFile = Workbook.createWorkbook(new File("src/main/resources/ExpressShopping_Results.xls"),readableFile);
+        writableFile = Workbook.createWorkbook(new File("src/main/resources/express_results.xls"),readableFile);
         //Step 2: accessing the excel sheet from the workbook
         writableSheet = writableFile.getSheet(0);
         //Step 3: row count will return all the rows which is not empty
@@ -40,7 +40,7 @@ public class express_NG {
 
     @Test
     public void ExpressCheckoutIteration() throws InterruptedException, WriteException {
-        for (int i = 1; i < 2; i++) {
+        for (int i = 1; i < rowCount; i++) {
             //get cell's 2 arguments are column and row
             String size = writableSheet.getCell(0, i).getContents();
             String qty = writableSheet.getCell(1, i).getContents();
