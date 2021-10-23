@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression">
+    <test name="End to End Test" preserve-order="true">
+        <classes>
+            <class name="TransamericaLifeInsurance.TC1"></class>
+            <class name="TransamericaLifeInsurance.TC2"></class>
+            <class name="TransamericaLifeInsurance.TC3"></class>
+            <class name="TransamericaLifeInsurance.TC4"></class>
+            <class name="TransamericaLifeInsurance.TC9"></class>
+            <class name="TransamericaLifeInsurance.TC7"></class>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

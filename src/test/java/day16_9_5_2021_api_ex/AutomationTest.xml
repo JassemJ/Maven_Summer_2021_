@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression">
+    <test name="End to End Test" preserve-order="true">
+        <classes>
+            <class name="day16_9_5_2021_api_ex.UC1"/>
+            <!--            <class name="day16_9_5_2021_api_ex.TC2"/>-->
+            <class name="day16_9_5_2021_api_ex.UC2"/>
+            <!--            <class name="day16_9_5_2021_api_ex.TC4"/>-->
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
+

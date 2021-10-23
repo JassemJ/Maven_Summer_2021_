@@ -22,20 +22,23 @@ public class Twitter_Api_Test extends Reuseable_Annotations_Class_HTML_Report {
     public void setup(){
         RestAssured.baseURI="https://api.twitter.com/1.1/statuses/";
     }//end of set up
+    // endpoint
 
     @Test (priority = 1)
     public void postAStatus(){
-        Response response =
+        Response response = // store response given() auth(), when(), then()
                 given()
                         .auth().oauth(consumerKey, consumerSecret, accessToken, tokenSecret).
-                        queryParam("status", "My fourth post through api automation")
-                        .when().post("update.json")
-                        .then().extract().response();
+                        queryParam("status", "My fourth post through api automation") // key,value
+                        .when().post("update.json") // get post delete
+                        .then().extract().response(); // get Response
 
         if(response.statusCode() == 200){
             System.out.println("Status code is 200 as expected");
+            //log
         } else {
             System.out.println("Actual status code is " + response.statusCode());
+            //log
         }
 
         //verify the id and the text after posting

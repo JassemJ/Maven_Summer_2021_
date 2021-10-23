@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class Twitter_Delete_Recent_20 {
+public class Twitter_Delete_Recent_20_fromLoadTest {
 
     String consumerKey="ooyo7W8uuur7wJqxUIw7jxLrA";
     String consumerSecret = "hNa5Jmtrzi71SP6I0G9wfgtI7vqPwOgQ8lrULXD6AlLNTxdeYv";

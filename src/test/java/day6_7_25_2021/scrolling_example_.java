@@ -14,13 +14,13 @@ public class scrolling_example_ {
         ChromeOptions options = new ChromeOptions(); // set up options for how chrome will be opened
         //options.addArguments("start-maximized","incognito");
         WebDriver driver = new ChromeDriver(options); // instantiate chrome browser
-        driver.navigate().to("https://www.yahoo.com/");
+        driver.navigate().to("https://www.apple.com/");
         Thread.sleep(2000); // wait for element to exist
 
-        WebElement search_ = driver.findElement(By.xpath("//*[@type='text']"));
-        search_.sendKeys("Cars");
-        search_.submit();
-        Thread.sleep(2000);
+        //WebElement search_ = driver.findElement(By.xpath("//*[@type='text']"));
+        //search_.sendKeys("Cars");
+        //search_.submit();
+        //Thread.sleep(2000);
 
         // scroll all the way to bottom so we can see search results number
         // may or may not be necessary purely visual ?
@@ -31,11 +31,11 @@ public class scrolling_example_ {
         Thread.sleep(2000);
 
         // capture result and print only numbers portion
-        String result = driver.findElement(By.xpath("//*[@class='compPagination']")).getText();
-        String[] numResults = result.split("Next");
-        String noWS_numResults = numResults[1].trim();
-        String[] number = noWS_numResults.split(" ");
-        System.out.println("The number of results is: "+number[0]);
+        //String result = driver.findElement(By.xpath("//*[@class='compPagination']")).getText();
+        //String[] numResults = result.split("Next");
+        //String noWS_numResults = numResults[1].trim();
+        //String[] number = noWS_numResults.split(" ");
+        //System.out.println("The number of results is: "+number[0]);
 
         jse.executeScript("scroll(0,-6000)");
         Thread.sleep(2000);

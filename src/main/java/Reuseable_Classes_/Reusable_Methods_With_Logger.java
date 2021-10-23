@@ -54,7 +54,44 @@ public class Reusable_Methods_With_Logger {
         WebDriverWait wait = new WebDriverWait(driver,15);
         try{
             WebElement element = wait.until(ExpectedConditions.visibilityOf(xpath));
-            element.clear();
+            //element.click();
+            //element.clear();
+            //Thread.sleep(500);
+            element.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+            //element.click();
+            //String inputText = element.getAttribute("value");
+            //if( inputText != null ) {
+                //for(int i=0; i<inputText.length();i++) {
+                   // element.sendKeys(Keys.BACK_SPACE);
+               // }
+            //}
+            element.sendKeys(userValue);
+            System.out.println("Successfully entered a value on " + elementName);
+            logger.log(LogStatus.PASS,"Successfully entered a value on " + elementName);
+        } catch (Exception err) {
+            System.out.println("Unable to enter a value on " + elementName);
+            logger.log(LogStatus.FAIL,"Unable to enter a value on " + elementName);
+            getScreenShot(driver,elementName,logger);
+        }
+    }//end of sendKeysMethod
+
+    //clear and enter a value using sendKeys
+    public static void sendKeysMethodEmptyField(WebDriver driver,WebElement xpath,String userValue,String elementName, ExtentTest logger){
+        // page object approach everything is WebElement
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        try{
+            WebElement element = wait.until(ExpectedConditions.visibilityOf(xpath));
+            //element.click();
+            //element.clear();
+            //Thread.sleep(500);
+            //element.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+            //element.click();
+            //String inputText = element.getAttribute("value");
+            //if( inputText != null ) {
+            //for(int i=0; i<inputText.length();i++) {
+            // element.sendKeys(Keys.BACK_SPACE);
+            // }
+            //}
             element.sendKeys(userValue);
             System.out.println("Successfully entered a value on " + elementName);
             logger.log(LogStatus.PASS,"Successfully entered a value on " + elementName);
@@ -74,10 +111,16 @@ public class Reusable_Methods_With_Logger {
             //WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
             element.click();
             logger.log(LogStatus.PASS,"Successfully clicked on " + elementName);
-        } catch (Exception err) {
+        }
+//        catch (NoSuchElementException e){
+//            System.out.println("Popup didn't appear...Proceed to next step");
+//            logger.log(LogStatus.PASS,"Popup didn't appear...Proceed to next step"+elementName);
+//            getScreenShot(driver,elementName,logger);
+//        }
+        catch (Exception err) {
             System.out.println("Popup didn't appear...Proceed to next step");
-            logger.log(LogStatus.FAIL,"Unable to click on popup or popup did not show up" + elementName);
-            getScreenShot(driver,elementName,logger);
+            logger.log(LogStatus.INFO,"Unable to click on popup or popup did not show up" + elementName);
+            //getScreenShot(driver,elementName,logger);
 
         }
     }//end of clickIfPopupExist
@@ -274,13 +317,64 @@ public class Reusable_Methods_With_Logger {
         } catch (Exception e) {
 
             System.out.println("Unable to move the slider " + elementName + " " + e);
-            logger.log(LogStatus.PASS,"Unable to move slider " + elementName);
+            logger.log(LogStatus.FAIL,"Unable to move slider " + elementName);
             getScreenShot(driver,elementName,logger);
 
 
         }//end of slider by SendKeys method
 
     }//end of slider method
+
+    public static void scrollUpDown(WebDriver driver, int num, ExtentTest logger){
+        try{
+            System.out.println("Trying to scroll");
+            Thread.sleep(3000);
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            String num_ = String.valueOf(num);
+            String amount = "scroll(0,"+num+")";
+            jse.executeScript(amount);
+            logger.log(LogStatus.PASS,"Successfully scrolled");
+        }catch(Exception e){
+            System.out.println("Unable to scroll");
+            logger.log(LogStatus.FAIL,"Unable to scroll");
+        }
+
+    }
+
+    private static void scrollUpDown(WebDriver driver, int num){
+        try{
+            System.out.println("Trying to scroll");
+            Thread.sleep(3000);
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            String num_ = String.valueOf(num);
+            //System.out.println(num);
+            String amount = "scroll(0,"+num+")";
+            jse.executeScript(amount);
+            //logger.log(LogStatus.PASS,"Successfully scrolled");
+        }catch(Exception e){
+            System.out.println("Unable to scroll");
+            //logger.log(LogStatus.FAIL,"Unable to scroll");
+        }
+
+    }
+
+    public static void zoomTo(WebDriver driver, WebElement xpath, ExtentTest logger){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        try{
+            System.out.println("Trying to zoom" );
+            WebElement element = wait.until(ExpectedConditions.visibilityOf(xpath));
+            Actions action = new Actions(driver);
+            action.moveToElement(element).perform();
+            Thread.sleep(1000);
+            //((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(false);", element);
+            //scrollUpDown(driver,1000);
+            logger.log(LogStatus.PASS,"Successfully zoomed");
+        }catch(Exception e){
+            System.out.println("Unable to zoom");
+            logger.log(LogStatus.FAIL,"Unable to zoom");
+        }
+
+    }
 
     //method to capture screenshot when logger fails
     public static void getScreenShot(WebDriver driver,String imageName,ExtentTest logger) {
@@ -295,6 +389,25 @@ public class Reusable_Methods_With_Logger {
             //String imgPath = directory + fileName;
             String image = logger.addScreenCapture(snPath + fileName);
             logger.log(LogStatus.FAIL, "", image);
+        } catch (Exception e) {
+            logger.log(LogStatus.FAIL, "Error Occured while taking SCREENSHOT!!!");
+            e.printStackTrace();
+        }
+    }//end of getScreenshot method
+
+    //method to capture screenshot when logger fails
+    public static void getScreenShot(WebDriver driver,String imageName,ExtentTest logger, Boolean status) {
+        try {
+            String fileName = imageName + ".png";
+            String directory = null;
+            String snPath = null;
+            directory = "src/main/java/Extent_Report/Screenshots/";
+            snPath = "Screenshots//";
+            File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(sourceFile, new File(directory + fileName));
+            //String imgPath = directory + fileName;
+            String image = logger.addScreenCapture(snPath + fileName);
+            logger.log(LogStatus.PASS, "", image);
         } catch (Exception e) {
             logger.log(LogStatus.FAIL, "Error Occured while taking SCREENSHOT!!!");
             e.printStackTrace();
